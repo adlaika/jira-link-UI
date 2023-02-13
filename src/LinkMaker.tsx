@@ -20,11 +20,15 @@ export default function LinkMaker ({tasks, developers}) {
   const [links, setLinks] = useState([]);
 
   const handleClick = ({ tasks, developers }) => {
-    const links = R.flatten(R.values(R.map(({title, taskIds}) => 
-      R.values(R.map(taskId => 
-        makeJiraLink({assignee: title, developer: title, summary: tasks[taskId].content})
-      , taskIds))
-    , developers)))
+    const links = R.pipe(
+      R.map(({title, taskIds}) => 
+        R.values(R.map(taskId => 
+          makeJiraLink({assignee: title, developer: title, summary: tasks[taskId].content})
+          , taskIds))
+      ),
+      R.values,
+      R.flatten
+    )(developers)
     setLinks(links)
   }
 

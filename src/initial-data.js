@@ -30,7 +30,6 @@ const initialData = {
       taskIds: []
     },
   },
-  // Facilitate reordering of the columns
   columnOrder: ['unassigned', 'john-doe', 'jane-smith', 'hughbert-wonk'],
 };
 
